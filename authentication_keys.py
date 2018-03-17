@@ -1,8 +1,9 @@
-import sys
-import re
+from __future__ import print_function
 import io
 import os
 import random
+import re
+import sys
 
 account_sequence = 0
 
@@ -65,7 +66,7 @@ def get_valid_accounts():
     for name, data in accounts.iteritems():
         available_accounts.append(name)
     if len(available_accounts) < 1:
-        print "No accounts available to sign on with..."
+        print("No accounts available to sign on with...")
         sys.exit(0)
     return available_accounts, accounts
 
@@ -85,7 +86,7 @@ def get_account_credentials():
 
 def get_account_sequential():
     global account_sequence
-    print "Account sequence: " + str(account_sequence)
+    print("Account sequence: " + str(account_sequence))
     available_accounts, accounts = get_valid_accounts()
     acct_name = available_accounts[account_sequence]
     account_sequence += 1

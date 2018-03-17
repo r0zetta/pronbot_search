@@ -1,11 +1,8 @@
-from file_helpers import *
-import requests
-import json
-import io
-import os
-import re
+from __future__ import print_function
+
 import sys
-import shutil
+
+from file_helpers import load_json
 
 if __name__ == "__main__":
     query = ""
@@ -23,5 +20,4 @@ if __name__ == "__main__":
                 found.append(source)
 
     for f in found:
-        print f
-
+        print(f)

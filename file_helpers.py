@@ -1,7 +1,10 @@
-from six.moves import cPickle
-import os
-import json
 import io
+import json
+import os
+
+from six import text_type
+from six.moves import cPickle
+
 
 def save_bin(item, filename):
     with open(filename, "wb") as f:
@@ -19,7 +22,7 @@ def load_bin(filename):
 
 def save_json(variable, filename):
     with io.open(filename, "w", encoding="utf-8") as f:
-        f.write(unicode(json.dumps(variable, indent=4, ensure_ascii=False)))
+        f.write(text_type(json.dumps(variable, indent=4, ensure_ascii=False)))
 
 def load_json(filename):
     ret = None
@@ -34,7 +37,7 @@ def load_json(filename):
 def save_counter_csv(counter_data, filename):
     with io.open(filename, "w", encoding="utf-8") as f:
         for name, value in counter_data.most_common(50):
-            f.write(unicode(value) + u"\t" + unicode(name) + u"\n")
+            f.write(text_type(value) + u"\t" + text_type(name) + u"\n")
 
 def save_gephi_csv(data_map, filename):
     with io.open(filename, "w", encoding="utf-8") as f:
@@ -42,7 +45,7 @@ def save_gephi_csv(data_map, filename):
         for source, targets in data_map.iteritems():
             if len(targets) > 0:
                 for target, weight in targets.iteritems():
-                    f.write(unicode(source) + u"," + unicode(target) + u"," + unicode(weight) + u"\n")
+                    f.write(text_type(source) + u"," + text_type(target) + u"," + text_type(weight) + u"\n")
 
 def save_heatmap(heatmap, filename):
     with open(filename, 'w') as handle:
@@ -58,7 +61,7 @@ def save_heatmap(heatmap, filename):
 def save_list(dataset, filename):
     with io.open(filename, "w", encoding="utf-8") as f:
         for key, val in dataset:
-            f.write(unicode(val) + u"\t" + unicode(key) + u"\n")
+            f.write(text_type(val) + u"\t" + text_type(key) + u"\n")
 
 def try_load_or_process(filename, processor_fn, function_arg):
     load_fn = None
@@ -111,5 +114,3 @@ def get_stopwords(filename, lang):
         all_stopwords = load_json(filename)
         if lang in all_stopwords:
             return all_stopwords[lang]
-
-
